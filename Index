@@ -1,1 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+<body>
+    <div class="dataSection" id="tempoSection">
+    <div class="dataDisplay">Tempo:<div id="tempoDisplay"></div></div>
+    
+    <div>upper tempo value</div>
+    <div class="slidecontainer">
+        <input type="range" min="40" max="300" value="160" class="slider" id="tempoHigh"><div id="tempoHighDisplay"></div>
+    </div>
 
+    <div>lower tempo value</div>
+    <div class="slidecontainer">
+        <input type="range" min="40" max="300" value="80" class="slider" id="tempoLow"><div id="tempoLowDisplay"></div>
+    </div>
+
+    <button class="generate" type="button" id="tempoButton" onclick="getTempoInRange()">Get random tempo from range</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
