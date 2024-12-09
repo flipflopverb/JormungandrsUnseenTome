@@ -6,21 +6,43 @@
     <title>home</title>
 </head>
 <body>
-    <div class="dataSection" id="tempoSection">
-    <div class="dataDisplay">Tempo:<div id="tempoDisplay"></div></div>
-    
-    <div>upper tempo value</div>
-    <div class="slidecontainer">
-        <input type="range" min="40" max="300" value="160" class="slider" id="tempoHigh"><div id="tempoHighDisplay"></div>
+    <div id="songData">
+        <div class="individualDataDisplay">Title: <span id="titleDisplay"></span></div>
+        <div class="individualDataDisplay">Tempo: <span id="tempoDisplay"></span></div>
+        <div class="individualDataDisplay"># of 16 beat (aka 4 bar) sections: <span id="numberOfSectionsDisplay"></span></div>
+        <div class="individualDataDisplay">Scale: <span id="scaleDisplay"></span></div>
+        <div class="individualDataDisplay">Chord Progressions: <span id="ChordDisplay"></span></div>
     </div>
+<p>
+</br>
+</br>
+</p>        
+<button type="button" id="generateButton" onclick="getTempoInRange();getnumberOfSections()">Generate Song</button>
+        </div>
+<p>
+</br>
+</br>
+</p>   
 
-    <div>lower tempo value</div>
-    <div class="slidecontainer">
-        <input type="range" min="40" max="300" value="80" class="slider" id="tempoLow"><div id="tempoLowDisplay"></div>
-    </div>
+        <div class="dataSection">
+        
+        
+        <div>upper tempo value</div>
+        <div class="slidecontainer">
+            <input type="range" min="40" max="300" value="160" class="slider" id="tempoHigh"><div id="tempoHighDisplay"></div>
+        </div>
 
-    <button class="generate" type="button" id="tempoButton" onclick="getTempoInRange()">Get random tempo from range</button>
-    </div>
+        <div>lower tempo value</div>
+        <div class="slidecontainer">
+            <input type="range" min="40" max="300" value="80" class="slider" id="tempoLow"><div id="tempoLowDisplay"></div>
+        </div>
+
+        <div>length of song (in seconds)</div>
+        <div class="slidecontainer">
+            <input type="range" min="15" max="1200" value="210" class="slider" id="songLength"><div id="songLengthDisplay"></div>
+        </div>
+
+        
 
     <script src="script.js"></script>
 </body>
