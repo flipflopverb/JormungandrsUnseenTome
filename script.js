@@ -13,6 +13,25 @@ var secondaryChordProgression = []
 var secondaryChordProgDisplay = []
 var bridgeChordProgression = []
 var bridgeChordProgDisplay = []
+var bassPatternArrayAll = []
+var bassPatternGroupArray = []
+var bassPatternNamesArray = []
+var kickPatternArrayAll = []
+var leadPatternArrayAll = []
+var modulationArrayAll = []
+
+let bassPrimaryPattern
+let bassSecondaryPattern
+let bassBridgePattern
+let kickPrimaryPattern
+let kickSecondaryPattern
+let kickBridgePattern
+let leadPrimaryPattern
+let leadSecondaryPattern
+let leadBridgePattern
+let modulationPrimary
+let modulationSecondary
+let modulationBridge
 
 var newTempo
 var numberOfSections
@@ -23,13 +42,28 @@ const numberOfSectionsOutput = document.getElementById("numberOfSectionsDisplay"
 const scaleDisplay = document.getElementById("scaleDisplay")
 const scaleNotesDisplay = document.getElementById("scaleNotesDisplay")
 const chordDisplay = document.getElementById("chordDisplay")
+const bassPatternDisplay = document.getElementById('bassPatternDisplay')
+const kickPatternDisplay = document.getElementById('kickPatternDisplay')
+const leadPatternDisplay = document.getElementById('leadPatternDisplay')
+const leadPlusPatternDisplay = document.getElementById('leadPlusPatternDisplay')
+
 
 const scaleTypeChoice = document.getElementById("scaleType")
 const scaleClassChoice = document.getElementById("scaleClass")
 const scaleLengthChoice = document.getElementById("scaleLength")
-
 const progressionChordChoices1 = document.getElementById("progressionChordChoices1")
-
+const bassPatternGroupChoice1 = document.getElementById("bassPatternGroupChoice1")
+const bassPatternGroupChoice2 = document.getElementById("bassPatternGroupChoice2")
+const bassPatternGroupChoice3 = document.getElementById("bassPatternGroupChoice3")
+const kickPatternGroupChoice1 = document.getElementById('kickPatternGroupChoice1')
+const kickPatternGroupChoice2 = document.getElementById('kickPatternGroupChoice2')
+const kickPatternGroupChoice3 = document.getElementById('kickPatternGroupChoice3')
+const leadPatternGroupChoice1 = document.getElementById('leadPatternGroupChoice1')
+const leadPatternGroupChoice2 = document.getElementById('leadPatternGroupChoice2')
+const leadPatternGroupChoice3 = document.getElementById('leadPatternGroupChoice3')
+const modulationTypeChoice1 = document.getElementById('modulationTypeChoice1')
+const modulationTypeChoice2 = document.getElementById('modulationTypeChoice2')
+const modulationTypeChoice3 = document.getElementById('modulationTypeChoice3')
 
 
 //all the Tempo Stuff
@@ -160,6 +194,68 @@ chordCountSection3.oninput = function() { //make the chord count slider update
 }
 
 
+//Bass stuff
+function BassPatternObject(bassPatternName, bassPatternGroup){
+    this.bassPatternName = bassPatternName
+    this.bassPatternGroup = bassPatternGroup
+    bassPatternArrayAll.push(this)
+   }
+
+const bassPattern1 = new BassPatternObject('Dubstep', 'Chaotic')
+const bassPattern2 = new BassPatternObject('Dubinato', 'Chaotic')
+const bassPattern3 = new BassPatternObject('Stop n Go', 'Melodic')
+const bassPattern4 = new BassPatternObject('Melodic', 'Melodic')
+const bassPattern5 = new BassPatternObject('Kick Syncopated', 'Driving')
+const bassPattern6 = new BassPatternObject('Seq/Arp', 'Driving')
+const bassPattern7 = new BassPatternObject('Ostinato', 'Driving')
+const bassPattern8 = new BassPatternObject('Hold n Pump', 'Driving')
+const bassPattern9 = new BassPatternObject('Klaxon', 'Alarm')
+const bassPattern10 = new BassPatternObject('Decay Pad', 'Alarm')
+
+//Kick Stuff
+function KickPatternObject(kickPatternName, kickPatternGroup){
+    this.kickPatternName = kickPatternName
+    this.kickPatternGroup = kickPatternGroup
+    kickPatternArrayAll.push(this)
+    }
+    
+const kickPattern1 = new KickPatternObject('DnB', 'Chaos')
+const kickPattern2 = new KickPatternObject('Latin', 'Pump')
+const kickPattern3 = new KickPatternObject('Heart', 'Pump')
+const kickPattern4 = new KickPatternObject('4OTF', 'Driving')
+const kickPattern5 = new KickPatternObject('Hip Hop >6 Hits', 'Funky')
+const kickPattern6 = new KickPatternObject('Hip Hop 5 to 6 Hits', 'Funky')
+const kickPattern7 = new KickPatternObject('Hip Hop 3 to 4 Hits', 'Funky')
+const kickPattern8 = new KickPatternObject('Hip Hop 1 to 2 Hits', 'Funky')
+
+
+//Lead stuff
+function LeadPatternObject(leadPatternName, leadPatternGroup){
+    this.leadPatternName = leadPatternName
+    this.leadPatternGroup = leadPatternGroup
+    leadPatternArrayAll.push(this)
+   }
+
+const leadPattern1 = new LeadPatternObject('Constant', 'Driving')
+const leadPattern2 = new LeadPatternObject('Syncopated', 'Syncopated')
+const leadPattern3 = new LeadPatternObject('Seq/Arp', 'Down beat')
+const leadPattern4 = new LeadPatternObject('Sync Rest', 'Syncopated')
+const leadPattern5 = new LeadPatternObject('Fast n Rest', 'Down beat')
+const leadPattern6 = new LeadPatternObject('Long Drawn', 'Driving')
+
+//Modulation stuff
+function ModulationObject(modulationName, modulationType, modulationClass){
+this.modulationName = modulationName
+this.modulationType = modulationType
+this.modulationClass = modulationClass
+modulationArrayAll.push(this)
+}
+
+const modulation1 = new ModulationObject('Ascent', 'Directional', 'Any')
+const modulation2 = new ModulationObject('Descent', 'Directional', 'Any')
+const modulation3 = new ModulationObject('Melodic', 'Directional', 'Melody')
+const modulation4 = new ModulationObject('Chord', 'Directional', 'Any')
+const modulation5 = new ModulationObject('None', 'None', 'Any')
 
 
 
@@ -171,9 +267,14 @@ chordCountSection3.oninput = function() { //make the chord count slider update
 
 
 
-//these functions get triggered when they click the generate song button
 
 
+
+
+
+
+
+//the below functions get triggered when they click the generate song button
     function getTempoInRange(low, high) {
         tempoHigh = sliderHigh.value; //set var equal to slider
         tempoLow = sliderLow.value;
@@ -258,7 +359,6 @@ chordCountSection3.oninput = function() { //make the chord count slider update
                 thisSongsChordChoicesAre.push(chordArrayAll[i])
             }
         }
-        console.log(thisSongsChordChoicesAre)
         for(let i = 0; i < chordCountSection1.value;){
             var num = Math.floor(Math.random()*thisSongsChordChoicesAre.length)
             if(i === 0){
@@ -302,9 +402,215 @@ chordCountSection3.oninput = function() { //make the chord count slider update
         chordDisplay.innerHTML = (primaryChordProgDisplay + ' | ' + secondaryChordProgDisplay  + ' | ' + bridgeChordProgDisplay)
     }
 
+    // the method I used for pulling bass patterns is so much better than the above systems. I need to rebuild a lot of stuff.
+    function getBassPatterns(){
+
+        let num
+
+        if(bassPatternGroupChoice1.value === 'Any'){
+            num = Math.floor(Math.random()*leadPatternArrayAll.length)
+            bassPrimaryPattern = (bassPatternArrayAll[num])
+        } else if(bassPatternGroupChoice1.value !== 'Any'){
+            let bassPatternsOfChoiceGroup = bassPatternArrayAll.filter((a) => a.bassPatternGroup === bassPatternGroupChoice1.value)
+            num4 = Math.floor(Math.random()*bassPatternsOfChoiceGroup.length)
+            bassPrimaryPattern = (bassPatternsOfChoiceGroup[num4])
+        }
+
+        if(bassPatternGroupChoice2.value === 'Any'){
+            num = Math.floor(Math.random()*leadPatternArrayAll.length)
+            bassSecondaryPattern = (bassPatternArrayAll[num])
+                while(bassSecondaryPattern.bassPatternGroup === bassPrimaryPattern.bassPatternGroup){
+                    num = Math.floor(Math.random()*leadPatternArrayAll.length)
+                    bassSecondaryPattern = (bassPatternArrayAll[num])
+                    }
+        } else if(bassPatternGroupChoice2.value !== 'Any'){
+            let bassPatternsOfChoiceGroup = bassPatternArrayAll.filter((a) => a.bassPatternGroup === bassPatternGroupChoice2.value)
+            num = Math.floor(Math.random()*bassPatternsOfChoiceGroup.length)
+            bassSecondaryPattern = (bassPatternsOfChoiceGroup[num])
+                while(bassSecondaryPattern.bassPatternGroup === bassPrimaryPattern.bassPatternGroup){
+                num = Math.floor(Math.random()*bassPatternsOfChoiceGroup.length)
+                bassSecondaryPattern = (bassPatternsOfChoiceGroup[num])
+                }
+        }
+
+        if(bassPatternGroupChoice3.value === 'Any'){
+            num = Math.floor(Math.random()*leadPatternArrayAll.length)
+            bassBridgePattern = (bassPatternArrayAll[num])
+        } else if(bassPatternGroupChoice3.value !== 'Any'){
+            let bassPatternsOfChoiceGroup = bassPatternArrayAll.filter((a) => a.bassPatternGroup === bassPatternGroupChoice3.value)
+            num = Math.floor(Math.random()*bassPatternsOfChoiceGroup.length)
+            bassBridgePattern = (bassPatternsOfChoiceGroup[num])
+        }
+
+        if(bassPrimaryPattern === bassSecondaryPattern){
+            console.log('BAD')
+        }
+            bassPatternDisplay.innerHTML = (bassPrimaryPattern.bassPatternName + ' | ' + bassSecondaryPattern.bassPatternName + ' | ' + bassBridgePattern.bassPatternName)
+        
+    }
+
+    function getKickPatterns(){
+
+        let num
+
+        if(kickPatternGroupChoice1.value === 'Any'){
+            num = Math.floor(Math.random()*kickPatternArrayAll.length)
+            kickPrimaryPattern = (kickPatternArrayAll[num])
+        } else if(kickPatternGroupChoice1.value === 'NotFunky'){
+            let kickPatternsOfChoiceGroup = kickPatternArrayAll.filter((a) => a.kickPatternGroup !== 'Funky')
+            num = Math.floor(Math.random()*kickPatternsOfChoiceGroup.length)
+            kickPrimaryPattern = (kickPatternsOfChoiceGroup[num])
+        } else if(kickPatternGroupChoice1.value !== 'Any'){
+            let kickPatternsOfChoiceGroup = kickPatternArrayAll.filter((a) => a.kickPatternGroup === kickPatternGroupChoice1.value)
+            num = Math.floor(Math.random()*kickPatternsOfChoiceGroup.length)
+            kickPrimaryPattern = (kickPatternsOfChoiceGroup[num])
+        } 
+
+        if(kickPatternGroupChoice2.value === 'Any'){
+            num = Math.floor(Math.random()*kickPatternArrayAll.length)
+            kickSecondaryPattern = (kickPatternArrayAll[num])
+        } else if(kickPatternGroupChoice2.value === 'NotFunky'){
+            let kickPatternsOfChoiceGroup = kickPatternArrayAll.filter((a) => a.kickPatternGroup !== 'Funky')
+            num = Math.floor(Math.random()*kickPatternsOfChoiceGroup.length)
+            kickSecondaryPattern = (kickPatternsOfChoiceGroup[num])
+        } else if(kickPatternGroupChoice2.value !== 'Any'){
+            let kickPatternsOfChoiceGroup = kickPatternArrayAll.filter((a) => a.kickPatternGroup === kickPatternGroupChoice2.value)
+            num = Math.floor(Math.random()*kickPatternsOfChoiceGroup.length)
+            kickSecondaryPattern = (kickPatternsOfChoiceGroup[num])
+        } 
+
+        if(kickPatternGroupChoice3.value === 'Any'){
+            num = Math.floor(Math.random()*kickPatternArrayAll.length)
+            kickBridgePattern = (kickPatternArrayAll[num])
+        } else if(kickPatternGroupChoice3.value === 'NotFunky'){
+            let kickPatternsOfChoiceGroup = kickPatternArrayAll.filter((a) => a.kickPatternGroup !== 'Funky')
+            num = Math.floor(Math.random()*kickPatternsOfChoiceGroup.length)
+            kickBridgePattern = (kickPatternsOfChoiceGroup[num])
+        }else if(kickPatternGroupChoice3.value !== 'Any'){
+            let kickPatternsOfChoiceGroup = kickPatternArrayAll.filter((a) => a.kickPatternGroup === kickPatternGroupChoice3.value)
+            num = Math.floor(Math.random()*kickPatternsOfChoiceGroup.length)
+            kickBridgePattern = (kickPatternsOfChoiceGroup[num])
+        } 
+
+        kickPatternDisplay.innerHTML = (kickPrimaryPattern.kickPatternName + ' | ' + kickSecondaryPattern.kickPatternName + ' | ' + kickBridgePattern.kickPatternName)
+        
+    }
+
+    function getLeadPatterns(){
+        let num
+        let num1 = Math.floor(Math.random()*leadPatternArrayAll.length)
+        let num2 = Math.floor(Math.random()*leadPatternArrayAll.length)
+        let num3 = Math.floor(Math.random()*leadPatternArrayAll.length)
+
+        if(leadPatternGroupChoice1.value === 'Any'){
+            num = Math.floor(Math.random()*leadPatternArrayAll.length)
+            leadPrimaryPattern = (leadPatternArrayAll[num1])
+        } else if(leadPatternGroupChoice1.value !== 'Any'){
+            let leadPatternsOfChoiceGroup = leadPatternArrayAll.filter((a) => a.leadPatternGroup === leadPatternGroupChoice1.value)
+            num4 = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
+            leadPrimaryPattern = (leadPatternsOfChoiceGroup[num4])
+        }
+
+        if(leadPatternGroupChoice2.value === 'Any'){
+            num = Math.floor(Math.random()*leadPatternArrayAll.length)
+            leadSecondaryPattern = (leadPatternArrayAll[num])
+            while(leadSecondaryPattern === leadPrimaryPattern){
+                num = Math.floor(Math.random()*leadPatternArrayAll.length)
+                leadSecondaryPattern = (leadPatternArrayAll[num])
+            }
+        } else if(leadPatternGroupChoice2.value !== 'Any'){
+            let leadPatternsOfChoiceGroup = leadPatternArrayAll.filter((a) => a.leadPatternGroup === leadPatternGroupChoice2.value)
+            num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
+            leadSecondaryPattern = (leadPatternsOfChoiceGroup[num])
+            while(leadSecondaryPattern === leadPrimaryPattern){
+                num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
+                leadSecondaryPattern = (leadPatternsOfChoiceGroup[num])
+            }
+        }
+
+        if(leadPatternGroupChoice3.value === 'Any'){
+            num = Math.floor(Math.random()*leadPatternArrayAll.length)
+            leadBridgePattern = (leadPatternArrayAll[num])
+        } else if(leadPatternGroupChoice3.value !== 'Any'){
+            let leadPatternsOfChoiceGroup = leadPatternArrayAll.filter((a) => a.leadPatternGroup === leadPatternGroupChoice3.value)
+            num6 = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
+            leadBridgePattern = (leadPatternsOfChoiceGroup[num6])
+        }
+
+            //this section does the lead+ stuff
+            leadPlusPrimaryPattern = (leadPatternArrayAll[num1])
+            leadPlusSecondaryPattern = (leadPatternArrayAll[num2])
+            leadPlusBridgePattern = (leadPatternArrayAll[num3])
+
+
+
+            leadPlusPatternDisplay.innerHTML = (leadPlusPrimaryPattern.leadPatternName + ' | ' + leadPlusSecondaryPattern.leadPatternName + ' | ' + leadPlusBridgePattern.leadPatternName)
+
+            leadPatternDisplay.innerHTML = (leadPrimaryPattern.leadPatternName + ' | ' + leadSecondaryPattern.leadPatternName + ' | ' + leadBridgePattern.leadPatternName)
+        
+    }
+
+    function getModulation(){
+        if(modulationTypeChoice1.value === 'Any'){
+            let num = Math.floor(Math.random()*modulationArrayAll.length)
+            modulationPrimary = (modulationArrayAll[num])
+        } else if(modulationTypeChoice1.value !== 'Any'){
+            let modulationOfChoiceType = modulationArrayAll.filter((a) => a.modulationType === modulationTypeChoice1.value)
+            let num = Math.floor(Math.random()*modulationOfChoiceType.length)
+            modulationPrimary = (modulationOfChoiceType[num])
+        }
+
+        if(modulationTypeChoice2.value === 'Any'){
+            let num = Math.floor(Math.random()*modulationArrayAll.length)
+            modulationSecondary = (modulationArrayAll[num])
+            } else if(modulationTypeChoice2.value !== 'Any'){
+                let modulationOfChoiceType = modulationArrayAll.filter((a) => a.modulationType === modulationTypeChoice2.value)
+                let num = Math.floor(Math.random()*modulationOfChoiceType.length)
+                modulationSecondary = (modulationOfChoiceType[num])
+            }
+
+        if(modulationTypeChoice3.value === 'Any'){
+            let num = Math.floor(Math.random()*modulationArrayAll.length)
+            modulationBridge = (modulationArrayAll[num])
+            } else if(modulationTypeChoice3.value !== 'Any'){
+                let modulationOfChoiceType = modulationArrayAll.filter((a) => a.modulationType === modulationTypeChoice3.value)
+                let num = Math.floor(Math.random()*modulationOfChoiceType.length)
+                modulationBridge = (modulationOfChoiceType[num])
+            }
+
+            modulationDisplay.innerHTML = (modulationPrimary.modulationName + ' | ' + modulationSecondary.modulationName + ' | ' + modulationBridge.modulationName)
+        
+    }
+
     
 getTempoInRange()
 getnumberOfSections()
 getScale()
 getChords()
+getBassPatterns()
+getKickPatterns()
+getLeadPatterns()
+getModulation()
+
+//for testing and generating many songs
+for(let i = 0; i < 100; i++){
+    getTempoInRange()
+    getnumberOfSections()
+    getScale()
+    getChords()
+    getBassPatterns()
+    getKickPatterns()
+    getLeadPatterns()
+    getModulation()
+    console.log('&' + newTempo + '&' + 
+                numberOfSections + '&' + 
+                (thisSongsKeyIs + " " + thisSongsScaleIs.scaleName)  + '&' + 
+                (primaryChordProgDisplay + ' | ' + secondaryChordProgDisplay  + ' | ' + bridgeChordProgDisplay) + '&' +
+                (bassPrimaryPattern.bassPatternName + ' | ' + bassSecondaryPattern.bassPatternName + ' | ' + bassBridgePattern.bassPatternName) + '&' +
+                (kickPrimaryPattern.kickPatternName + ' | ' + kickSecondaryPattern.kickPatternName + ' | ' + kickBridgePattern.kickPatternName) + '&' +
+                (leadPrimaryPattern.leadPatternName + ' | ' + leadSecondaryPattern.leadPatternName + ' | ' + leadBridgePattern.leadPatternName) + '&' +
+                (leadPlusPrimaryPattern.leadPatternName + ' | ' + leadPlusSecondaryPattern.leadPatternName + ' | ' + leadPlusBridgePattern.leadPatternName) + '&' +
+                (modulationPrimary.modulationName + ' | ' + modulationSecondary.modulationName + ' | ' + modulationBridge.modulationName)
+
+            )}
 
