@@ -12,14 +12,13 @@
         <div class="individualDataDisplay"># of 16 beat (aka 4 bar) sections: <span id="numberOfSectionsDisplay"></span></div>
         <div class="individualDataDisplay">Scale: <span id="scaleDisplay"></span></div>
         <div class="individualDataDisplay">Notes in the Scale: <span id="scaleNotesDisplay"></span></div>
-        <div class="individualDataDisplay">Chord Progressions: <span id="ChordDisplay"></span></div>
+        <div class="individualDataDisplay">Chord Progressions: <span id="chordDisplay"></span></div>
     </div>
 <p>
 </br>
 </br>
 </p>        
-<button type="button" id="generateButton" onclick="getTempoInRange();getnumberOfSections();getScale()">Generate Song</button>
-        </div>
+<button type="button" id="generateButton" onclick="getTempoInRange();getnumberOfSections();getScale();getChords()">Generate Song</button>
 <p>
 </br>
 </br>
@@ -30,36 +29,53 @@
         
         <div>upper tempo value</div>
         <div class="slidecontainer"><input type="range" min="40" max="300" value="160" class="slider" id="tempoHigh"><div id="tempoHighDisplay"></div></div>
-
+    </br>
         <div>lower tempo value</div>
         <div class="slidecontainer"><input type="range" min="40" max="300" value="80" class="slider" id="tempoLow"><div id="tempoLowDisplay"></div></div>
-
+    </br>
         <div>length of song (in seconds)</div>
         <div class="slidecontainer"><input type="range" min="15" max="1200" value="210" class="slider" id="songLength"><div id="songLengthDisplay"></div></div>
-
-        <label for="scaleType">Choose a Scale:</label>
+    </br>
+        <div><label for="scaleType">Choose a Scale:</label>
             <select id="scaleType">
             <option value="Any" selected="selected">Any</option>
             <option value="Major">Only Major</option>
             <option value="Minor">Only Minor</option>
-            </select>
-
-        <label for="scaleClass">Choose a Class:</label>
+            </select></div>
+        </br>
+        <div><label for="scaleClass">Choose a Class:</label>
             <select id="scaleClass">
-            <option value="Any">Any</option>
-            <option value="Traditional" selected="selected">Traditional (Major, Natural Minor)</option>
-            <option value="nonstandard">Non-standard (Harmonic, Melodic)</option>
-            </select>
-
-        <label for="scaleLength">Choose a Length:</label>
+            <option value="Any" selected="selected">Any</option>
+            <option value="Traditional" >Traditional (Major, Natural Minor)</option>
+            <option value="nonstandard" >Non-standard (Harmonic, Melodic)</option>
+            </select></div>
+        </br>
+        <div><label for="scaleLength">Choose a Length:</label>
             <select id="scaleLength">
             <option value="Any">Any</option>
             <option value="Heptatonic" selected="selected">Heptatonic (7 notes)</option>
             <option value="Pentatonic">Pentatonic (5 notes)</option>
-            </select>
+            </select></div>
+        </br>
+        <div><label for="chordCountSection1">How many chords in the Primary progression?</label>
+            <div><input type="range" id="chordCountSection1" min="2" max="8" class="slider" value="4"><div id="outputChordCountDisplay1"></div></div>
+        </div>
 
+        </br>
+        <div><label for="chordCountSection2">How many chords in the Secondary progression?</label>
+            <div><input type="range" id="chordCountSection2" min="2" max="8" class="slider" value="4"><div id="outputChordCountDisplay2"></div></div>
+        </div>
+
+        </br>
+        <div><label for="chordCountSection3">How many chords in the Bridge progression?</label>
+            <div><input type="range" id="chordCountSection3" min="2" max="8" class="slider" value="4"><div id="outputChordCountDisplay3"></div></div>
+        </div>
+    
+    </div>
+            
         
 
     <script src="script.js"></script>
 </body>
 </html>
+
