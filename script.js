@@ -466,8 +466,7 @@
                     num = Math.floor(Math.random()*leadPatternArrayAll.length)
                     leadSecondaryPattern = (leadPatternArrayAll[num])
                 }
-                
-        } else if(leadPatternGroupChoice2.value !== 'Any'){
+            }else if(leadPatternGroupChoice2.value !== 'Any'){
             let leadPatternsOfChoiceGroup = leadPatternArrayAll.filter((a) => a.leadPatternGroup === leadPatternGroupChoice2.value)
             num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
             leadSecondaryPattern = (leadPatternsOfChoiceGroup[num])
@@ -480,8 +479,8 @@
                     num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
                     leadSecondaryPattern = (leadPatternsOfChoiceGroup[num])
                     } 
-                }     
-        }
+                }
+            
 
         if(leadPatternGroupChoice3.value === 'Any'){
             num = Math.floor(Math.random()*leadPatternArrayAll.length)
