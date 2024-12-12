@@ -366,17 +366,27 @@
         if(bassPatternGroupChoice2.value === 'Any'){
             num = Math.floor(Math.random()*leadPatternArrayAll.length)
             bassSecondaryPattern = (bassPatternArrayAll[num])
-                while(bassSecondaryPattern.bassPatternGroup === bassPrimaryPattern.bassPatternGroup){
-                    num = Math.floor(Math.random()*leadPatternArrayAll.length)
+                if (bassSecondaryPattern.bassPatternGroup === bassPrimaryPattern.bassPatternGroup){
+                    for(let i = 0;i<100;i++){
+                        num = Math.floor(Math.random()*leadPatternArrayAll.length)
                     bassSecondaryPattern = (bassPatternArrayAll[num])
                     }
+                } else{
+                    num = Math.floor(Math.random()*leadPatternArrayAll.length)
+                    bassSecondaryPattern = (bassPatternArrayAll[num])
+                }
         } else if(bassPatternGroupChoice2.value !== 'Any'){
             let bassPatternsOfChoiceGroup = bassPatternArrayAll.filter((a) => a.bassPatternGroup === bassPatternGroupChoice2.value)
             num = Math.floor(Math.random()*bassPatternsOfChoiceGroup.length)
             bassSecondaryPattern = (bassPatternsOfChoiceGroup[num])
-                while(bassSecondaryPattern.bassPatternGroup === bassPrimaryPattern.bassPatternGroup){
-                num = Math.floor(Math.random()*bassPatternsOfChoiceGroup.length)
-                bassSecondaryPattern = (bassPatternsOfChoiceGroup[num])
+                if (bassSecondaryPattern.bassPatternGroup === bassPrimaryPattern.bassPatternGroup){
+                        for(let i = 0;i<100;i++){
+                    num = Math.floor(Math.random()*bassPatternsOfChoiceGroup.length)
+                    bassSecondaryPattern = (bassPatternsOfChoiceGroup[num])
+                    }
+                } else {
+                    num = Math.floor(Math.random()*bassPatternsOfChoiceGroup.length)
+                    bassSecondaryPattern = (bassPatternsOfChoiceGroup[num])
                 }
         }
 
@@ -389,9 +399,6 @@
             bassBridgePattern = (bassPatternsOfChoiceGroup[num])
         }
 
-        if(bassPrimaryPattern === bassSecondaryPattern){
-            console.log('BAD')
-        }
             bassPatternDisplay.innerHTML = (bassPrimaryPattern.bassPatternName + ' | ' + bassSecondaryPattern.bassPatternName + ' | ' + bassBridgePattern.bassPatternName)
         
     }
@@ -459,18 +466,28 @@
         if(leadPatternGroupChoice2.value === 'Any'){
             num = Math.floor(Math.random()*leadPatternArrayAll.length)
             leadSecondaryPattern = (leadPatternArrayAll[num])
-                while(leadSecondaryPattern === leadPrimaryPattern){
-                num = Math.floor(Math.random()*leadPatternArrayAll.length)
-                leadSecondaryPattern = (leadPatternArrayAll[num])
+                if(leadSecondaryPattern === leadPrimaryPattern){
+                    for(let i = 0;i<100;i++){
+                    num = Math.floor(Math.random()*leadPatternArrayAll.length)
+                    leadSecondaryPattern = (leadPatternArrayAll[num])
+                }
+                }else{
+                    num = Math.floor(Math.random()*leadPatternArrayAll.length)
+                    leadSecondaryPattern = (leadPatternArrayAll[num])
                 }
         } else if(leadPatternGroupChoice2.value !== 'Any'){
             let leadPatternsOfChoiceGroup = leadPatternArrayAll.filter((a) => a.leadPatternGroup === leadPatternGroupChoice2.value)
             num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
             leadSecondaryPattern = (leadPatternsOfChoiceGroup[num])
-                while(leadSecondaryPattern === leadPrimaryPattern){
+                if(leadSecondaryPattern === leadPrimaryPattern){
+                    for(let i = 0;i<100;i++){
                     num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
                     leadSecondaryPattern = (leadPatternsOfChoiceGroup[num])
                 }
+                }else{
+                    num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
+                    leadSecondaryPattern = (leadPatternsOfChoiceGroup[num])
+                }      
         }
 
         if(leadPatternGroupChoice3.value === 'Any'){
