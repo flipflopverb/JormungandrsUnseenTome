@@ -1,340 +1,267 @@
 //initial values and variables and arrays
-var tempo = []
-var scaleArray = []
-var chordArrayAll = []
-var chordArrayMajor = []
-var chordArrayMinor = []
-var scaleOptionsForThisSong = []
-var thisSongsNotesAre = []
-var thisSongsChordChoicesAre = []
-var primaryChordProgression = []
-var primaryChordProgDisplay = []
-var secondaryChordProgression = []
-var secondaryChordProgDisplay = []
-var bridgeChordProgression = []
-var bridgeChordProgDisplay = []
-var bassPatternArrayAll = []
-var bassPatternGroupArray = []
-var bassPatternNamesArray = []
-var kickPatternArrayAll = []
-var leadPatternArrayAll = []
-var modulationArrayAll = []
+    let tempo = []
+    let scaleArray = []
+    let chordArrayAll = []
+    let scaleOptionsForThisSong = []
+    let thisSongsNotesAre = []
+    let thisSongsChordChoicesAre = []
+    let primaryChordProgression = []; let secondaryChordProgression = []; let bridgeChordProgression = []
+    let primaryChordProgDisplay = []; let secondaryChordProgDisplay = []; let bridgeChordProgDisplay = []
+    let bassPatternArrayAll = []; let bassPatternGroupArray = []; let bassPatternNamesArray = []
+    let kickPatternArrayAll = []
+    let leadPatternArrayAll = []
+    let modulationArrayAll = []
 
-let bassPrimaryPattern
-let bassSecondaryPattern
-let bassBridgePattern
-let kickPrimaryPattern
-let kickSecondaryPattern
-let kickBridgePattern
-let leadPrimaryPattern
-let leadSecondaryPattern
-let leadBridgePattern
-let modulationPrimary
-let modulationSecondary
-let modulationBridge
+    let twelveTET = ['C', 'C#', 'D','D#','E','F','F#','G','G#','A','A#','B']; let twelveTETMod; let twelveTETindex
+    let songTempo
+    let songLength
+    let numberOfSections
+    let thisSongsScaleIs
+    let bassPrimaryPattern; let bassSecondaryPattern; let bassBridgePattern
+    let kickPrimaryPattern; let kickSecondaryPattern; let kickBridgePattern
+    let leadPrimaryPattern; let leadSecondaryPattern; let leadBridgePattern
+    let modulationPrimary; let modulationSecondary; let modulationBridge
 
-var newTempo
-var numberOfSections
-var thisSongsScaleIs
-
-const tempoOutput = document.getElementById("tempoDisplay")
-const numberOfSectionsOutput = document.getElementById("numberOfSectionsDisplay")
-const scaleDisplay = document.getElementById("scaleDisplay")
-const scaleNotesDisplay = document.getElementById("scaleNotesDisplay")
-const chordDisplay = document.getElementById("chordDisplay")
-const bassPatternDisplay = document.getElementById('bassPatternDisplay')
-const kickPatternDisplay = document.getElementById('kickPatternDisplay')
-const leadPatternDisplay = document.getElementById('leadPatternDisplay')
-const leadPlusPatternDisplay = document.getElementById('leadPlusPatternDisplay')
-
-
-const scaleTypeChoice = document.getElementById("scaleType")
-const scaleClassChoice = document.getElementById("scaleClass")
-const scaleLengthChoice = document.getElementById("scaleLength")
-const progressionChordChoices1 = document.getElementById("progressionChordChoices1")
-const bassPatternGroupChoice1 = document.getElementById("bassPatternGroupChoice1")
-const bassPatternGroupChoice2 = document.getElementById("bassPatternGroupChoice2")
-const bassPatternGroupChoice3 = document.getElementById("bassPatternGroupChoice3")
-const kickPatternGroupChoice1 = document.getElementById('kickPatternGroupChoice1')
-const kickPatternGroupChoice2 = document.getElementById('kickPatternGroupChoice2')
-const kickPatternGroupChoice3 = document.getElementById('kickPatternGroupChoice3')
-const leadPatternGroupChoice1 = document.getElementById('leadPatternGroupChoice1')
-const leadPatternGroupChoice2 = document.getElementById('leadPatternGroupChoice2')
-const leadPatternGroupChoice3 = document.getElementById('leadPatternGroupChoice3')
-const modulationTypeChoice1 = document.getElementById('modulationTypeChoice1')
-const modulationTypeChoice2 = document.getElementById('modulationTypeChoice2')
-const modulationTypeChoice3 = document.getElementById('modulationTypeChoice3')
-
-
-//all the Tempo Stuff
-var sliderHigh = document.getElementById("tempoHigh"); // Display the tempo high slider value
-var outputHigh = document.getElementById("tempoHighDisplay");
-outputHigh.innerHTML = sliderHigh.value;
-var tempoHigh = sliderHigh.value;
-
-var sliderLow = document.getElementById("tempoLow"); // Display the tempo low slider value
-var outputLow = document.getElementById("tempoLowDisplay");
-outputLow.innerHTML = sliderLow.value;
-var tempoLow = sliderLow.value;
-
-var sliderSongLength = document.getElementById("songLength"); // Display the song length slider value
-var outputSongLength = document.getElementById("songLengthDisplay");
-outputSongLength.innerHTML = sliderSongLength.value;
-var songLength = sliderSongLength.value;
-
-sliderHigh.oninput = function() { //make the sliders update the html to reflect changes
-    outputHigh.innerHTML = this.value;
-}
-sliderLow.oninput = function() {
-    outputLow.innerHTML = this.value;
-}
-sliderSongLength.oninput = function() {
-    outputSongLength.innerHTML = this.value;
-}
+//display items
+    const outputHigh = document.getElementById("tempoHighDisplay")
+    const outputLow = document.getElementById("tempoLowDisplay")
+    const outputSongLength = document.getElementById("songLengthDisplay")
+    const tempoOutput = document.getElementById("tempoDisplay")
+    const numberOfSectionsOutput = document.getElementById("numberOfSectionsDisplay")
+    const scaleDisplay = document.getElementById("scaleDisplay")
+    const scaleNotesDisplay = document.getElementById("scaleNotesDisplay")
+    const chordDisplay = document.getElementById("chordDisplay")
+    const bassPatternDisplay = document.getElementById('bassPatternDisplay')
+    const kickPatternDisplay = document.getElementById('kickPatternDisplay')
+    const leadPatternDisplay = document.getElementById('leadPatternDisplay')
+    const leadPlusPatternDisplay = document.getElementById('leadPlusPatternDisplay')
+    const outputChordCount1 = document.getElementById("outputChordCountDisplay1"); const outputChordCount2 = document.getElementById("outputChordCountDisplay2"); const outputChordCount3 = document.getElementById("outputChordCountDisplay3")
 
 
 
-//chromatic note objects and note arrays
-var twelveTET = ['C', 'C#', 'D','D#','E','F','F#','G','G#','A','A#','B']
-var twelveTETMod
-var twelveTETindex
+//user chosen values
+    const sliderTempoHigh = document.getElementById("tempoHigh")
+    const sliderTempoLow = document.getElementById("tempoLow")
+    const sliderSongLength = document.getElementById("songLength")
+    const scaleTypeChoice = document.getElementById("scaleType")
+    const scaleClassChoice = document.getElementById("scaleClass")
+    const scaleLengthChoice = document.getElementById("scaleLength")
+    const slot1Preference = document.getElementById('slot1Preference')
+    const chordCountSection1 = document.getElementById("chordCountSection1"); const chordCountSection2 = document.getElementById("chordCountSection2"); const chordCountSection3 = document.getElementById("chordCountSection3")
+    const borrowedChords2 = document.getElementById('borrowedChords2');// const borrowedChords3 = document.getElementById('borrowedChords3')
+    const bassPatternGroupChoice1 = document.getElementById("bassPatternGroupChoice1"); const bassPatternGroupChoice2 = document.getElementById("bassPatternGroupChoice2"); const bassPatternGroupChoice3 = document.getElementById("bassPatternGroupChoice3")
+    const kickPatternGroupChoice1 = document.getElementById('kickPatternGroupChoice1'); const kickPatternGroupChoice2 = document.getElementById('kickPatternGroupChoice2'); const kickPatternGroupChoice3 = document.getElementById('kickPatternGroupChoice3')
+    const leadPatternGroupChoice1 = document.getElementById('leadPatternGroupChoice1'); const leadPatternGroupChoice2 = document.getElementById('leadPatternGroupChoice2'); const leadPatternGroupChoice3 = document.getElementById('leadPatternGroupChoice3')
+    const modulationTypeChoice1 = document.getElementById('modulationTypeChoice1'); const modulationTypeChoice2 = document.getElementById('modulationTypeChoice2'); const modulationTypeChoice3 = document.getElementById('modulationTypeChoice3')
 
-
-
-
-//scale objects and scale interval arrays
-function ScaleObject(scaleName, scaleInterval, scaleLength, scaleClass, scaleType){
-    this.scaleName = scaleName
-    this.scaleInterval = scaleInterval
-    this.scaleLength = scaleLength
-    this.scaleClass = scaleClass
-    this.scaleType = scaleType
-    scaleArray.push(this)
-} 
-const scale1 = new ScaleObject('Natural Major',[0,2,4,5,7,9,11],'Heptatonic','Traditional', 'Major')
-const scale2 = new ScaleObject('Natural Minor',[0,2,3,5,7,8,10],'Heptatonic','Traditional', 'Minor')
-const scale3 = new ScaleObject('Harmonic Minor', [0,2,3,5,7,8,11],'Heptatonic','nonstandard', 'Minor')
-const scale4 = new ScaleObject('Melodic Minor',[0,2,3,5,7,9,11],'Heptatonic','nonstandard', 'Minor')
-const scale5 = new ScaleObject('Major Pentatonic', [0,2,4,7,9],'Pentatonic', 'nonstandard','Major')
-const scale6 = new ScaleObject('Minor Pentatonic', [0,3,5,7,10],'Pentatonic', 'nonstandard','Minor')
-
-
-
-//chord progressions
-function ChordObject(chordCategory, chordRomanSymbol, chordDegree, chordIntervals, chordDensity, chordClass, chordScale, chordSubScale){
- this.chordCategory = chordCategory
- this.chordRomanSymbol = chordRomanSymbol
- this.chordDegree = chordDegree
- this.chordIntervals = chordIntervals
- this.chordDensity = chordDensity
- this.chordClass = chordClass
- this.chordScale = chordScale
- this.chordSubScale = chordSubScale
- chordArrayAll.push(this)
-}
-
-const chord1 = new ChordObject('Major Triad','I', 'Tonic', [0, 2, 4], 3, 'Traditional', 'Major', 'Natural')
-const chord2 = new ChordObject('Minor Triad','ii', 'Supertonic', [1, 3, 5], 3, 'Traditional', 'Major', 'Natural')
-const chord3 = new ChordObject('Minor Triad','iii', 'Mediant', [2, 4, 6], 3, 'Traditional', 'Major', 'Natural')
-const chord4 = new ChordObject('Major Triad','IV', 'Subdominant', [4, 6, 0], 3, 'Traditional', 'Major', 'Natural')
-const chord5 = new ChordObject('Major Triad','V', 'Dominant', [5, 7, 1], 3, 'Traditional', 'Major', 'Natural')
-const chord6 = new ChordObject('Minor Triad','vi', 'Submediant', [6, 0, 2], 3, 'Traditional', 'Major', 'Natural')
-const chord7 = new ChordObject('Diminished Triad','vii°', 'Leading Tone', [7, 1, 3], 3, 'Traditional', 'Major', 'Natural')
-
-const chord8 = new ChordObject('Minor Triad','i', 'Tonic', [0, 2, 4], 3, 'Traditional', 'Minor', 'Natural')
-const chord9 = new ChordObject('Diminished Triad','ii°', 'Supertonic', [1, 3, 5], 3, 'Traditional', 'Minor', 'Natural')
-const chord10 = new ChordObject('Major Triad','III', 'Mediant', [2, 4, 6], 3, 'Traditional', 'Minor', 'Natural')
-const chord11 = new ChordObject('Minor Triad','iv', 'Subdominant', [4, 6, 0], 3, 'Traditional', 'Minor', 'Natural')
-const chord12 = new ChordObject('Minor Triad','v', 'Dominant', [5, 7, 1], 3, 'Traditional', 'Minor', 'Natural')
-const chord13 = new ChordObject('Major Triad','VI', 'Submediant', [6, 0, 2], 3, 'Traditional', 'Minor', 'Natural')
-const chord14 = new ChordObject('Major Triad','VII', 'Subtonic', [7, 1, 3], 3, 'Traditional', 'Minor', 'Natural')
-
-const chord15 = new ChordObject('Minor Triad','i', 'Tonic', [0, 2, 4], 3, 'nonstandard', 'Minor', 'Harmonic')
-const chord16 = new ChordObject('Diminished Triad','ii°', 'Supertonic', [1, 3, 5], 3, 'nonstandard', 'Minor', 'Harmonic')
-const chord17 = new ChordObject('Augmented Triad','III⁺', 'Mediant', [2, 4, 6], 3, 'nonstandard', 'Minor', 'Harmonic')
-const chord18 = new ChordObject('Minor Triad','iv', 'Subdominant', [4, 6, 0], 3, 'nonstandard', 'Minor', 'Harmonic')
-const chord19 = new ChordObject('Major Triad','V', 'Dominant', [5, 7, 1], 3, 'nonstandard', 'Minor', 'Harmonic')
-const chord20 = new ChordObject('Major Triad','VI', 'Submediant', [6, 0, 2], 3, 'nonstandard', 'Minor', 'Harmonic')
-const chord21 = new ChordObject('Diminished Triad','vii°', 'Subtonic', [7, 1, 3], 3, 'nonstandard', 'Minor', 'Harmonic')
-
-const chord22 = new ChordObject('Minor Triad','i', 'Tonic', [0, 2, 4], 3, 'nonstandard', 'Minor', 'Melodic')
-const chord23 = new ChordObject('Minor Triad','ii', 'Supertonic', [1, 3, 5], 3, 'nonstandard', 'Minor', 'Melodic')
-const chord24 = new ChordObject('Augmented Triad','III⁺', 'Mediant', [2, 4, 6], 3, 'nonstandard', 'Minor', 'Melodic')
-const chord25 = new ChordObject('Major Triad','IV', 'Subdominant', [4, 6, 0], 3, 'nonstandard', 'Minor', 'Melodic')
-const chord26 = new ChordObject('Major Triad','V', 'Dominant', [5, 7, 1], 3, 'nonstandard', 'Minor', 'Melodic')
-const chord27 = new ChordObject('Diminished Triad','vi°', 'Submediant', [6, 0, 2], 3, 'nonstandard', 'Minor', 'Melodic')
-const chord28 = new ChordObject('Diminished Triad','vii°', 'Subtonic', [7, 1, 3], 3, 'nonstandard', 'Minor', 'Melodic')
-
-
-var chordCountSection1 = document.getElementById("chordCountSection1"); // Display the chord count slider value
-var outputChordCount1 = document.getElementById("outputChordCountDisplay1");
-outputChordCount1.innerHTML = chordCountSection1.value;
-
-chordCountSection1.oninput = function() { //make the chord count slider update
-    outputChordCount1.innerHTML = this.value;
+//buttons
+    const generateButton = document.getElementById('generateButton')
+    const generateManyButton = document.getElementById('generateManyButton')
     
-}
-
-var chordCountSection2 = document.getElementById("chordCountSection2"); // Display the chord count slider value
-var outputChordCount2 = document.getElementById("outputChordCountDisplay2");
-outputChordCount2.innerHTML = chordCountSection2.value;
-
-chordCountSection2.oninput = function() { //make the chord count slider update
-    outputChordCount2.innerHTML = this.value;
-    
-}
-
-var chordCountSection3 = document.getElementById("chordCountSection3"); // Display the chord count slider value
-var outputChordCount3 = document.getElementById("outputChordCountDisplay3");
-outputChordCount3.innerHTML = chordCountSection3.value;
-
-chordCountSection3.oninput = function() { //make the chord count slider update
-    outputChordCount3.innerHTML = this.value;
-    
-}
-
-
-//Bass stuff
-function BassPatternObject(bassPatternName, bassPatternGroup){
-    this.bassPatternName = bassPatternName
-    this.bassPatternGroup = bassPatternGroup
-    bassPatternArrayAll.push(this)
-   }
-
-const bassPattern1 = new BassPatternObject('Dubstep', 'Chaotic')
-const bassPattern2 = new BassPatternObject('Dubinato', 'Chaotic')
-const bassPattern3 = new BassPatternObject('Stop n Go', 'Melodic')
-const bassPattern4 = new BassPatternObject('Melodic', 'Melodic')
-const bassPattern5 = new BassPatternObject('Kick Syncopated', 'Driving')
-const bassPattern6 = new BassPatternObject('Seq/Arp', 'Driving')
-const bassPattern7 = new BassPatternObject('Ostinato', 'Driving')
-const bassPattern8 = new BassPatternObject('Hold n Pump', 'Driving')
-const bassPattern9 = new BassPatternObject('Klaxon', 'Alarm')
-const bassPattern10 = new BassPatternObject('Decay Pad', 'Alarm')
-
-//Kick Stuff
-function KickPatternObject(kickPatternName, kickPatternGroup){
-    this.kickPatternName = kickPatternName
-    this.kickPatternGroup = kickPatternGroup
-    kickPatternArrayAll.push(this)
+//reactive sliders to make numbers update in the HTML as it changes
+    sliderTempoHigh.oninput = function() {
+        outputHigh.innerHTML = this.value;
     }
-    
-const kickPattern1 = new KickPatternObject('DnB', 'Chaos')
-const kickPattern2 = new KickPatternObject('Latin', 'Pump')
-const kickPattern3 = new KickPatternObject('Heart', 'Pump')
-const kickPattern4 = new KickPatternObject('4OTF', 'Driving')
-const kickPattern5 = new KickPatternObject('Hip Hop >6 Hits', 'Funky')
-const kickPattern6 = new KickPatternObject('Hip Hop 5 to 6 Hits', 'Funky')
-const kickPattern7 = new KickPatternObject('Hip Hop 3 to 4 Hits', 'Funky')
-const kickPattern8 = new KickPatternObject('Hip Hop 1 to 2 Hits', 'Funky')
+    sliderTempoLow.oninput = function() {
+        outputLow.innerHTML = this.value;
+    }
+    sliderSongLength.oninput = function() {
+        outputSongLength.innerHTML = this.value;
+    }
+    chordCountSection1.oninput = function() { 
+        outputChordCount1.innerHTML = this.value;
+    }
+    chordCountSection2.oninput = function() {
+        outputChordCount2.innerHTML = this.value;
+    }
+    chordCountSection3.oninput = function() { 
+        outputChordCount3.innerHTML = this.value;
+    }
 
 
-//Lead stuff
-function LeadPatternObject(leadPatternName, leadPatternGroup){
-    this.leadPatternName = leadPatternName
-    this.leadPatternGroup = leadPatternGroup
-    leadPatternArrayAll.push(this)
-   }
+//Function factories for all the objects
+    function ChordObject(chordCategory, chordRomanSymbol,  chordQuality, chordDegree, chordIntervals, chordDensity, chordIntervalsAbsolute){
+    this.chordCategory = chordCategory
+    this.chordRomanSymbol = chordRomanSymbol
+    this.chordQuality = chordQuality
+    this.chordDegree = chordDegree
+    this.chordIntervals = chordIntervals
+    this.chordIntervalsAbsolute = chordIntervalsAbsolute
+    this.chordDensity = chordDensity
+    chordArrayAll.push(this)
+    }
 
-const leadPattern1 = new LeadPatternObject('Constant', 'Driving')
-const leadPattern2 = new LeadPatternObject('Syncopated', 'Syncopated')
-const leadPattern3 = new LeadPatternObject('Seq/Arp', 'Down beat')
-const leadPattern4 = new LeadPatternObject('Sync Rest', 'Syncopated')
-const leadPattern5 = new LeadPatternObject('Fast n Rest', 'Down beat')
-const leadPattern6 = new LeadPatternObject('Long Drawn', 'Driving')
-
-//Modulation stuff
-function ModulationObject(modulationName, modulationType, modulationClass){
-this.modulationName = modulationName
-this.modulationType = modulationType
-this.modulationClass = modulationClass
-modulationArrayAll.push(this)
-}
-
-const modulation1 = new ModulationObject('Ascent', 'Directional', 'Any')
-const modulation2 = new ModulationObject('Descent', 'Directional', 'Any')
-const modulation3 = new ModulationObject('Melodic', 'Directional', 'Melody')
-const modulation4 = new ModulationObject('Chord', 'Directional', 'Any')
-const modulation5 = new ModulationObject('None', 'None', 'Any')
-
-
-
-
-
+    const chord0 = new ChordObject('Major Triad','I', 'Major', 'Tonic', [0, 2, 4],[], 3)
+    const chord1 = new ChordObject('Minor Triad','i', 'Minor', 'Tonic', [0, 2, 4],[], 3)
+    const chord2 = new ChordObject('Minor Triad','ii', 'Minor', 'Supertonic', [1, 3, 5],[], 3)
+    const chord3 = new ChordObject('Diminished Triad','ii°', 'Diminished', 'Supertonic', [1, 3, 5],[], 3)
+    const chord4 = new ChordObject('Major Triad','III', 'Major', 'Mediant', [2, 4, 6],[], 3)
+    const chord5 = new ChordObject('Augmented Triad','III⁺', 'Diminished', 'Mediant', [2, 4, 6],[], 3)
+    const chord6 = new ChordObject('Minor Triad','iii', 'Minor', 'Mediant', [2, 4, 6],[], 3)
+    const chord7 = new ChordObject('Major Triad','IV', 'Major', 'Subdominant', [4, 6, 0],[], 3)
+    const chord8 = new ChordObject('Minor Triad','iv', 'Minor', 'Subdominant', [4, 6, 0],[], 3)
+    const chord9 = new ChordObject('Major Triad','V', 'Major','Dominant', [5, 7, 1],[], 3)
+    const chord10 = new ChordObject('Minor Triad','v', 'Minor', 'Dominant', [5, 7, 1],[], 3)
+    const chord11 = new ChordObject('Major Triad','VI', 'Major', 'Submediant', [6, 0, 2],[], 3)
+    const chord12 = new ChordObject('Minor Triad','vi', 'Minor', 'Submediant', [6, 0, 2],[], 3)
+    const chord13 = new ChordObject('Diminished Triad','vi°', 'Diminished', 'Submediant', [6, 0, 2],[], 3)
+    const chord14 = new ChordObject('Major Triad','VII', 'Major', 'Subtonic', [7, 1, 3],[], 3)
+    const chord15 = new ChordObject('Diminished Triad','vii°', 'Diminished', 'Leading Tone', [7, 1, 3],[], 3)
+    const chord16 = new ChordObject('Diminished Triad','vii°', 'Diminished','Subtonic', [7, 1, 3],[], 3)
+    //const chord99 = new ChordObject('Harold','X','Unreal', 'Power Bottom', [1,1,1],[], 3)
 
 
+    function ScaleObject(scaleName, scaleInterval, scaleLength, scaleClass, scaleType, scaleChordArray){
+        this.scaleName = scaleName
+        this.scaleInterval = scaleInterval
+        this.scaleLength = scaleLength
+        this.scaleClass = scaleClass
+        this.scaleType = scaleType
+        this.scaleChordArray = scaleChordArray
+        scaleArray.push(this)
+    } 
+    const scale1 = new ScaleObject('Major',[0,2,4,5,7,9,11],'Heptatonic','Traditional', 'Major',
+        [chordArrayAll[0],chordArrayAll[2],chordArrayAll[6],chordArrayAll[7],chordArrayAll[9],chordArrayAll[12],chordArrayAll[16]])
+    const scale2 = new ScaleObject('Natural Minor',[0,2,3,5,7,8,10],'Heptatonic','Traditional', 'Minor',
+        [chordArrayAll[1],chordArrayAll[3],chordArrayAll[4],chordArrayAll[8],chordArrayAll[10],chordArrayAll[11],chordArrayAll[14]])
+    const scale3 = new ScaleObject('Harmonic Minor', [0,2,3,5,7,8,11],'Heptatonic','nonstandard', 'Minor',
+        [chordArrayAll[1],chordArrayAll[3],chordArrayAll[5],chordArrayAll[8],chordArrayAll[9],chordArrayAll[11],chordArrayAll[16]])
+    const scale4 = new ScaleObject('Melodic Minor',[0,2,3,5,7,9,11],'Heptatonic','nonstandard', 'Minor',
+        [chordArrayAll[1],chordArrayAll[2],chordArrayAll[5],chordArrayAll[7],chordArrayAll[9],chordArrayAll[13],chordArrayAll[16]])
+    const scale5 = new ScaleObject('Major Pentatonic', [0,2,4,7,9],'Pentatonic', 'nonstandard','Major',
+        [chordArrayAll[0],chordArrayAll[12]])
+    const scale6 = new ScaleObject('Minor Pentatonic', [0,3,5,7,10],'Pentatonic', 'nonstandard','Minor', 
+        [chordArrayAll[0],chordArrayAll[12]])
 
 
+    function BassPatternObject(bassPatternName, bassPatternGroup){
+        this.bassPatternName = bassPatternName
+        this.bassPatternGroup = bassPatternGroup
+        bassPatternArrayAll.push(this)
+    }
 
+    const bassPattern1 = new BassPatternObject('Dubstep', 'Chaotic')
+    const bassPattern2 = new BassPatternObject('Dubinato', 'Chaotic')
+    const bassPattern3 = new BassPatternObject('Stop n Go', 'Melodic')
+    const bassPattern4 = new BassPatternObject('Melodic', 'Melodic')
+    const bassPattern5 = new BassPatternObject('Kick Syncopated', 'Driving')
+    const bassPattern6 = new BassPatternObject('Seq/Arp', 'Driving')
+    const bassPattern7 = new BassPatternObject('Ostinato', 'Driving')
+    const bassPattern8 = new BassPatternObject('Hold n Pump', 'Driving')
+    const bassPattern9 = new BassPatternObject('Klaxon', 'Alarm')
+    const bassPattern10 = new BassPatternObject('Decay Pad', 'Alarm')
 
-
-
-
-
-
-
-
-//the below functions get triggered when they click the generate song button
-    function getTempoInRange(low, high) {
-        tempoHigh = sliderHigh.value; //set var equal to slider
-        tempoLow = sliderLow.value;
-        tempo = [] //clear old value
-        tempo.push(tempoLow)
-        tempo.push(tempoHigh)
-        tempo.sort((a, b) => a - b);// sort the values, just in case they pick a weird range
-
-        high = tempo[1]; // get the high and low numbers
-        low = tempo[0];
+    function KickPatternObject(kickPatternName, kickPatternGroup){
+        this.kickPatternName = kickPatternName
+        this.kickPatternGroup = kickPatternGroup
+        kickPatternArrayAll.push(this)
+        }
         
-        newTempo = Math.floor((Math.random()*(Number(high)-Number(low)+1))+Number(low)); // The maximum is inclusive and the minimum is inclusive
-        tempoOutput.innerHTML = newTempo;
+    const kickPattern1 = new KickPatternObject('DnB', 'Chaos')
+    const kickPattern2 = new KickPatternObject('Latin', 'Pump')
+    const kickPattern3 = new KickPatternObject('Heart', 'Pump')
+    const kickPattern4 = new KickPatternObject('4OTF', 'Driving')
+    const kickPattern5 = new KickPatternObject('Hip Hop >6 Hits', 'Funky')
+    const kickPattern6 = new KickPatternObject('Hip Hop 5 to 6 Hits', 'Funky')
+    const kickPattern7 = new KickPatternObject('Hip Hop 3 to 4 Hits', 'Funky')
+    const kickPattern8 = new KickPatternObject('Hip Hop 1 to 2 Hits', 'Funky')
+
+    function LeadPatternObject(leadPatternName, leadPatternGroup){
+        this.leadPatternName = leadPatternName
+        this.leadPatternGroup = leadPatternGroup
+        leadPatternArrayAll.push(this)
     }
 
-    function getnumberOfSections(){
-            numberOfSections = Math.round((sliderSongLength.value * newTempo)/(960))
-            numberOfSectionsOutput.innerHTML = numberOfSections
+    const leadPattern1 = new LeadPatternObject('Constant', 'Driving')
+    const leadPattern2 = new LeadPatternObject('Syncopated', 'Syncopated')
+    const leadPattern3 = new LeadPatternObject('Seq/Arp', 'Down beat')
+    const leadPattern4 = new LeadPatternObject('Sync Rest', 'Syncopated')
+    const leadPattern5 = new LeadPatternObject('Fast n Rest', 'Down beat')
+    const leadPattern6 = new LeadPatternObject('Long Drawn', 'Driving')
+
+    function ModulationObject(modulationName, modulationType, modulationClass){
+        this.modulationName = modulationName
+        this.modulationType = modulationType
+        this.modulationClass = modulationClass
+        modulationArrayAll.push(this)
+        }
+
+    const modulation1 = new ModulationObject('Ascent', 'Ordered', 'Any')
+    const modulation2 = new ModulationObject('Descent', 'Ordered', 'Any')
+    const modulation3 = new ModulationObject('Melodic', 'Unordered', 'Melody')
+    const modulation4 = new ModulationObject('Chord', 'Following', 'Any')
+    const modulation5 = new ModulationObject('None', 'None', 'Any')
+
+
+
+
+
+
+//Function section
+
+    //button functions
+    generateButton.addEventListener('click', function(){
+        getTempoInRange()
+        getScale()
+        getChords()
+        getBassPatterns()
+        getKickPatterns()
+        getLeadPatterns()
+        getModulation()
+    })
+    generateManyButton.addEventListener('click', function(){
+        getMany()
+    })
+
+
+    function getTempoInRange() {
+        tempo = [] //clear old values
+        tempo.push(sliderTempoLow.value)
+        tempo.push(sliderTempoHigh.value)
+        tempo.sort((a, b) => a - b);// sort the values, just in case they pick a weird range
+        songTempo = Math.floor((Math.random()*(Number(tempo[1])-Number(tempo[0])+1))+Number(tempo[0]))
+        numberOfSections = Math.round((sliderSongLength.value * songTempo)/(960))
+        tempoOutput.innerHTML = songTempo;
+        numberOfSectionsOutput.innerHTML = numberOfSections
     }
 
     function getScale(){
-    scaleOptionsForThisSong = []
+    scaleOptionsForThisSong = []//clear old values
 
+        //this first "for" loop is just grabbing various scales that fit the chosen criteria. If a scale passes the check then its shoved in to an array.
         for (let i = 0; i < scaleArray.length; i++){
-            if( ((scaleTypeChoice.value === 'Any') || (scaleArray[i].scaleType === scaleTypeChoice.value)) &&
-                ((scaleClassChoice.value === 'Any') || (scaleArray[i].scaleClass === scaleClassChoice.value)) && 
-                ((scaleLengthChoice.value === 'Any') || (scaleArray[i].scaleLength === scaleLengthChoice.value)))
+            if( ((scaleTypeChoice.value === 'Any') || (scaleTypeChoice.value === scaleArray[i].scaleType)) &&
+                ((scaleClassChoice.value === 'Any') || (scaleClassChoice.value === scaleArray[i].scaleClass)) && 
+                ((scaleLengthChoice.value === 'Any') || (scaleLengthChoice.value === scaleArray[i].scaleLength)))
                 { 
                 scaleOptionsForThisSong.push(scaleArray[i])
-                
-
-            } else {
-                
             }
-        } 
+        }
+        //there are some combinations of preferences that a user can make with 
+        //regards to the scale that will result in 0 scales being pushed into the array
+        //that is why there is an "if" filter function right here
 
+        //the "if" filter pulls a scale at random from the prior array
         if(scaleOptionsForThisSong.length !== 0){
-            a = twelveTET.length
-            b = scaleOptionsForThisSong.length
-            
-            keyIndex = Math.floor(Math.random()*Number(a))
-            scaleIndex = Math.floor(Math.random()*Number(b))
-            thisSongsKeyIs = twelveTET[keyIndex]
-            thisSongsScaleIs = scaleOptionsForThisSong[scaleIndex]
-
-            scaleInt = scaleOptionsForThisSong[scaleIndex].scaleInterval
+            thisSongsKeyIs = twelveTET[Math.floor(Math.random()*Number(twelveTET.length))]
+            thisSongsScaleIs = scaleOptionsForThisSong[Math.floor(Math.random()*Number(scaleOptionsForThisSong.length))]
+            scaleInt = scaleOptionsForThisSong[Math.floor(Math.random()*Number(scaleOptionsForThisSong.length))].scaleInterval
             scaleDisplay.innerHTML = (thisSongsKeyIs + " " + thisSongsScaleIs.scaleName)
 
             twelveTETindex = twelveTET.indexOf(thisSongsKeyIs)
             twelveTETMod = []
             thisSongsNotesAre = []
 
+            //this first "for" loop ensures that the first letter of the Songs Key is put first
             for (let i = twelveTETindex; i < twelveTET.length; i++){
                 twelveTETMod.push(twelveTET[i])
             }
-
+            //this second "for" loop fils out the rest of the twelveTETMod array with notes that are prior to the Song Key
             for (let i = 0; i < twelveTETindex; i++){
                 twelveTETMod.push(twelveTET[i])
             }
 
+            //this last "for" loop iterates the scaleInterval attribute of the chosen scale over the twelveTETMod scale
             for (i in scaleInt) {
                 thisSongsNotesAre.push(twelveTETMod[scaleInt[i]]);
             }
@@ -346,6 +273,7 @@ const modulation5 = new ModulationObject('None', 'None', 'Any')
     }
 
     function getChords(){
+        //these blank arrays are just to clear any old values
         primaryChordProgression = []
         primaryChordProgDisplay = []
         secondaryChordProgression = []
@@ -353,40 +281,60 @@ const modulation5 = new ModulationObject('None', 'None', 'Any')
         bridgeChordProgression = []
         bridgeChordProgDisplay = []
         thisSongsChordChoicesAre = []
-        //console.log(chordArrayAll[20].chordSubScale + " " + chordArrayAll[20].chordScale, thisSongsScaleIs.scaleName)
-        for(let i = 0; i < chordArrayAll.length; i++){
-            if((chordArrayAll[i].chordSubScale + " " + chordArrayAll[i].chordScale) === thisSongsScaleIs.scaleName){
-                thisSongsChordChoicesAre.push(chordArrayAll[i])
-            }
-        }
+
+        thisSongsChordChoicesAre = thisSongsScaleIs.scaleChordArray
+        
         for(let i = 0; i < chordCountSection1.value;){
-            var num = Math.floor(Math.random()*thisSongsChordChoicesAre.length)
+            let num = Math.floor(Math.random()*thisSongsChordChoicesAre.length)
             if(i === 0){
+                if(slot1Preference.value === 'Any'){
                 primaryChordProgression.push(thisSongsChordChoicesAre[num])
                 primaryChordProgDisplay.push(thisSongsChordChoicesAre[num].chordRomanSymbol)
                 i++
+                } else{
+                    primaryChordProgression.push((thisSongsChordChoicesAre.filter((a) => a.chordDegree === slot1Preference.value))[0])
+                    primaryChordProgDisplay.push(primaryChordProgression[i].chordRomanSymbol)
+                    i++
+                }
             }else if(thisSongsChordChoicesAre[num] !== primaryChordProgression[i-1]){
                 primaryChordProgression.push(thisSongsChordChoicesAre[num])
                 primaryChordProgDisplay.push(thisSongsChordChoicesAre[num].chordRomanSymbol)
                 i++
             } else{}
         }
-
-        for(let i = 0; i < chordCountSection2.value;){
-            var num = Math.floor(Math.random()*thisSongsChordChoicesAre.length)
-            if(i === 0){
-                secondaryChordProgression.push(thisSongsChordChoicesAre[num])
-                secondaryChordProgDisplay.push(thisSongsChordChoicesAre[num].chordRomanSymbol)
-                i++
-            }else if(thisSongsChordChoicesAre[num] !== secondaryChordProgression[i-1]){
-                secondaryChordProgression.push(thisSongsChordChoicesAre[num])
-                secondaryChordProgDisplay.push(thisSongsChordChoicesAre[num].chordRomanSymbol)
-                i++
-            } else{}
+        
+        if(borrowedChords2.checked === true){
+            for(let i = 0; i < chordCountSection2.value;){
+                let num = Math.floor(Math.random()*chordArrayAll.length)
+                if(i === 0){
+                    num = Math.floor(Math.random()*thisSongsChordChoicesAre.length)
+                    secondaryChordProgression.push(thisSongsChordChoicesAre[num])
+                    secondaryChordProgDisplay.push(secondaryChordProgression[i].chordRomanSymbol)
+                    i++
+                    
+                }else if(chordArrayAll[num].chordDegree !== secondaryChordProgression[i-1].chordDegree){
+                    secondaryChordProgression.push(chordArrayAll[num])
+                    secondaryChordProgDisplay.push(secondaryChordProgression[i].chordRomanSymbol)
+                    i++
+                } else{}
+            }
+        } else {
+            for(let i = 0; i < chordCountSection2.value;){
+                let num = Math.floor(Math.random()*thisSongsChordChoicesAre.length)
+                if(i === 0){
+                    secondaryChordProgression.push(thisSongsChordChoicesAre[num])
+                    secondaryChordProgDisplay.push(thisSongsChordChoicesAre[num].chordRomanSymbol)
+                    i++
+                }else if(thisSongsChordChoicesAre[num] !== secondaryChordProgression[i-1]){
+                    secondaryChordProgression.push(thisSongsChordChoicesAre[num])
+                    secondaryChordProgDisplay.push(thisSongsChordChoicesAre[num].chordRomanSymbol)
+                    i++
+                } else{}
+            }
         }
 
         for(let i = 0; i < chordCountSection3.value;){
-            var num = Math.floor(Math.random()*thisSongsChordChoicesAre.length)
+            let num = Math.floor(Math.random()*thisSongsChordChoicesAre.length)
             if(i === 0){
                 bridgeChordProgression.push(thisSongsChordChoicesAre[num])
                 bridgeChordProgDisplay.push(thisSongsChordChoicesAre[num].chordRomanSymbol)
@@ -402,7 +350,6 @@ const modulation5 = new ModulationObject('None', 'None', 'Any')
         chordDisplay.innerHTML = (primaryChordProgDisplay + ' | ' + secondaryChordProgDisplay  + ' | ' + bridgeChordProgDisplay)
     }
 
-    // the method I used for pulling bass patterns is so much better than the above systems. I need to rebuild a lot of stuff.
     function getBassPatterns(){
 
         let num
@@ -497,35 +444,33 @@ const modulation5 = new ModulationObject('None', 'None', 'Any')
     }
 
     function getLeadPatterns(){
+        
         let num
-        let num1 = Math.floor(Math.random()*leadPatternArrayAll.length)
-        let num2 = Math.floor(Math.random()*leadPatternArrayAll.length)
-        let num3 = Math.floor(Math.random()*leadPatternArrayAll.length)
 
         if(leadPatternGroupChoice1.value === 'Any'){
             num = Math.floor(Math.random()*leadPatternArrayAll.length)
-            leadPrimaryPattern = (leadPatternArrayAll[num1])
+            leadPrimaryPattern = (leadPatternArrayAll[num])
         } else if(leadPatternGroupChoice1.value !== 'Any'){
             let leadPatternsOfChoiceGroup = leadPatternArrayAll.filter((a) => a.leadPatternGroup === leadPatternGroupChoice1.value)
-            num4 = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
-            leadPrimaryPattern = (leadPatternsOfChoiceGroup[num4])
+            num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
+            leadPrimaryPattern = (leadPatternsOfChoiceGroup[num])
         }
 
         if(leadPatternGroupChoice2.value === 'Any'){
             num = Math.floor(Math.random()*leadPatternArrayAll.length)
             leadSecondaryPattern = (leadPatternArrayAll[num])
-            while(leadSecondaryPattern === leadPrimaryPattern){
+                while(leadSecondaryPattern === leadPrimaryPattern){
                 num = Math.floor(Math.random()*leadPatternArrayAll.length)
                 leadSecondaryPattern = (leadPatternArrayAll[num])
-            }
+                }
         } else if(leadPatternGroupChoice2.value !== 'Any'){
             let leadPatternsOfChoiceGroup = leadPatternArrayAll.filter((a) => a.leadPatternGroup === leadPatternGroupChoice2.value)
             num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
             leadSecondaryPattern = (leadPatternsOfChoiceGroup[num])
-            while(leadSecondaryPattern === leadPrimaryPattern){
-                num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
-                leadSecondaryPattern = (leadPatternsOfChoiceGroup[num])
-            }
+                while(leadSecondaryPattern === leadPrimaryPattern){
+                    num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
+                    leadSecondaryPattern = (leadPatternsOfChoiceGroup[num])
+                }
         }
 
         if(leadPatternGroupChoice3.value === 'Any'){
@@ -533,21 +478,21 @@ const modulation5 = new ModulationObject('None', 'None', 'Any')
             leadBridgePattern = (leadPatternArrayAll[num])
         } else if(leadPatternGroupChoice3.value !== 'Any'){
             let leadPatternsOfChoiceGroup = leadPatternArrayAll.filter((a) => a.leadPatternGroup === leadPatternGroupChoice3.value)
-            num6 = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
-            leadBridgePattern = (leadPatternsOfChoiceGroup[num6])
+            num = Math.floor(Math.random()*leadPatternsOfChoiceGroup.length)
+            leadBridgePattern = (leadPatternsOfChoiceGroup[num])
         }
 
-            //this section does the lead+ stuff
-            leadPlusPrimaryPattern = (leadPatternArrayAll[num1])
-            leadPlusSecondaryPattern = (leadPatternArrayAll[num2])
-            leadPlusBridgePattern = (leadPatternArrayAll[num3])
 
+        let num1 = Math.floor(Math.random()*leadPatternArrayAll.length)
+        let num2 = Math.floor(Math.random()*leadPatternArrayAll.length)
+        let num3 = Math.floor(Math.random()*leadPatternArrayAll.length)
 
-
-            leadPlusPatternDisplay.innerHTML = (leadPlusPrimaryPattern.leadPatternName + ' | ' + leadPlusSecondaryPattern.leadPatternName + ' | ' + leadPlusBridgePattern.leadPatternName)
+        leadPlusPrimaryPattern = (leadPatternArrayAll[num1])
+        leadPlusSecondaryPattern = (leadPatternArrayAll[num2])
+        leadPlusBridgePattern = (leadPatternArrayAll[num3])
 
             leadPatternDisplay.innerHTML = (leadPrimaryPattern.leadPatternName + ' | ' + leadSecondaryPattern.leadPatternName + ' | ' + leadBridgePattern.leadPatternName)
-        
+            leadPlusPatternDisplay.innerHTML = (leadPlusPrimaryPattern.leadPatternName + ' | ' + leadPlusSecondaryPattern.leadPatternName + ' | ' + leadPlusBridgePattern.leadPatternName)
     }
 
     function getModulation(){
@@ -582,35 +527,30 @@ const modulation5 = new ModulationObject('None', 'None', 'Any')
         
     }
 
+    function getMany(){
+        console.clear()
+    for(let i = 0; i < 10; i++){
+    
+        getTempoInRange();getScale();getChords();getBassPatterns();getKickPatterns();getLeadPatterns();getModulation();
+    
+        console.log(' - ' + songTempo + ' - ' + 
+                    numberOfSections + ' - ' + 
+                    (thisSongsKeyIs + " " + thisSongsScaleIs.scaleName)  + ' - ' + 
+                    (primaryChordProgDisplay + ' | ' + secondaryChordProgDisplay  + ' | ' + bridgeChordProgDisplay) + ' - ' +
+                    (bassPrimaryPattern.bassPatternName + ' | ' + bassSecondaryPattern.bassPatternName + ' | ' + bassBridgePattern.bassPatternName) + ' - ' +
+                    (kickPrimaryPattern.kickPatternName + ' | ' + kickSecondaryPattern.kickPatternName + ' | ' + kickBridgePattern.kickPatternName) + ' - ' +
+                    (leadPrimaryPattern.leadPatternName + ' | ' + leadSecondaryPattern.leadPatternName + ' | ' + leadBridgePattern.leadPatternName) + ' - ' +
+                    (leadPlusPrimaryPattern.leadPatternName + ' | ' + leadPlusSecondaryPattern.leadPatternName + ' | ' + leadPlusBridgePattern.leadPatternName) + ' - ' +
+                    (modulationPrimary.modulationName + ' | ' + modulationSecondary.modulationName + ' | ' + modulationBridge.modulationName)
+    
+                )}
+            }
+
     
 getTempoInRange()
-getnumberOfSections()
 getScale()
 getChords()
 getBassPatterns()
 getKickPatterns()
 getLeadPatterns()
 getModulation()
-
-//for testing and generating many songs
-for(let i = 0; i < 100; i++){
-    getTempoInRange()
-    getnumberOfSections()
-    getScale()
-    getChords()
-    getBassPatterns()
-    getKickPatterns()
-    getLeadPatterns()
-    getModulation()
-    console.log('&' + newTempo + '&' + 
-                numberOfSections + '&' + 
-                (thisSongsKeyIs + " " + thisSongsScaleIs.scaleName)  + '&' + 
-                (primaryChordProgDisplay + ' | ' + secondaryChordProgDisplay  + ' | ' + bridgeChordProgDisplay) + '&' +
-                (bassPrimaryPattern.bassPatternName + ' | ' + bassSecondaryPattern.bassPatternName + ' | ' + bassBridgePattern.bassPatternName) + '&' +
-                (kickPrimaryPattern.kickPatternName + ' | ' + kickSecondaryPattern.kickPatternName + ' | ' + kickBridgePattern.kickPatternName) + '&' +
-                (leadPrimaryPattern.leadPatternName + ' | ' + leadSecondaryPattern.leadPatternName + ' | ' + leadBridgePattern.leadPatternName) + '&' +
-                (leadPlusPrimaryPattern.leadPatternName + ' | ' + leadPlusSecondaryPattern.leadPatternName + ' | ' + leadPlusBridgePattern.leadPatternName) + '&' +
-                (modulationPrimary.modulationName + ' | ' + modulationSecondary.modulationName + ' | ' + modulationBridge.modulationName)
-
-            )}
-
