@@ -23,7 +23,9 @@
 </br>
 </br>
 </p>        
-<button type="button" id="generateButton" onclick="getTempoInRange();getnumberOfSections();getScale();getChords();getBassPatterns();getKickPatterns();getLeadPatterns();getModulation()">Generate Song</button>
+<button type="button" id="generateButton">Generate Song</button>
+<button type="button" id="generateManyButton">Generate 10 Songs</button> 
+<br>(it will generate 10 songs in console log, lol)
 <p>
 </br>
 </br>
@@ -33,15 +35,16 @@
         
         
         <div>upper tempo value</div>
-        <div class="slidecontainer"><input type="range" min="40" max="300" value="120" class="slider" id="tempoHigh"><div id="tempoHighDisplay"></div></div>
+        <div class="slidecontainer"><input type="range" min="40" max="300" value="120" class="slider" id="tempoHigh"><div id="tempoHighDisplay">120</div></div>
     </br>
         <div>lower tempo value</div>
-        <div class="slidecontainer"><input type="range" min="40" max="300" value="80" class="slider" id="tempoLow"><div id="tempoLowDisplay"></div></div>
+        <div class="slidecontainer"><input type="range" min="40" max="300" value="80" class="slider" id="tempoLow"><div id="tempoLowDisplay">80</div></div>
     </br>
         <div>length of song (in seconds)</div>
         <div class="slidecontainer"><input type="range" min="15" max="1200" value="210" class="slider" id="songLength"><div id="songLengthDisplay"></div></div>
     </br>
-        <div><label for="scaleType">Choose a Scale:</label>
+</br></br></br><hr></br>
+        <div><label for="scaleType">Choose a Type:</label>
             <select id="scaleType">
             <option value="Any" selected="selected">Any</option>
             <option value="Major">Only Major</option>
@@ -61,22 +64,35 @@
             <option value="Heptatonic" selected="selected">Heptatonic (7 notes)</option>
             <option value="Pentatonic">Pentatonic (5 notes)</option>
             </select></div>
-        </br>
+        </br></br></br><hr></br>
         <div><label for="chordCountSection1">How many chords in the Primary progression?</label>
-            <div><input type="range" id="chordCountSection1" min="2" max="8" class="slider" value="4"><div id="outputChordCountDisplay1"></div></div>
+            <div><input type="range" id="chordCountSection1" min="2" max="8" class="slider" value="4"><div id="outputChordCountDisplay1">4</div></div>
+            <div><label for="slot1Preference">Do you have a preference for the first chord?</label>
+                <select id="slot1Preference">
+                    <option value="Any" selected="selected">Any</option>
+                    <option value="Tonic">Tonic</option>
+                    <option value="Supertonic" >Supertonic</option>
+                    <option value="Mediant">Mediant</option>
+                    <option value="Subdominant">Subdominant</option>
+                    <option value="Dominant">Dominant</option>
+                    <option value="Submediant">Submediant</option>
+                    <option value="Subtonic">Subtonic</option>
+                    </select></div>
         </div>
 
-        </br>
+        </br></br></br>
         <div><label for="chordCountSection2">How many chords in the Secondary progression?</label>
-            <div><input type="range" id="chordCountSection2" min="2" max="8" class="slider" value="4"><div id="outputChordCountDisplay2"></div></div>
+            <div><input type="range" id="chordCountSection2" min="2" max="8" class="slider" value="4"><div id="outputChordCountDisplay2">4</div></div>
+            <div><label for="borrowedChords2">Include Borrowed Chords Perhapse?</label><input type="checkbox" id="borrowedChords2" class="checkbox" checked></div>
         </div>
 
-        </br>
+        </br></br></br>
         <div><label for="chordCountSection3">How many chords in the Bridge progression?</label>
-            <div><input type="range" id="chordCountSection3" min="2" max="8" class="slider" value="4"><div id="outputChordCountDisplay3"></div></div>
+            <div><input type="range" id="chordCountSection3" min="2" max="8" class="slider" value="4"><div id="outputChordCountDisplay3">4</div></div>
+            
         </div>
 
-        </br>
+    </br></br></br><hr></br>
         <div><label for="bassPatternGroupChoice1">Bass Pattern Group Primary:</label>
             <select id="bassPatternGroupChoice1">
             <option value="Any">Any</option>
@@ -173,10 +189,9 @@
         <div><label for="modulationTypeChoice1">Modulation Primary Type:</label>
             <select id="modulationTypeChoice1">
             <option value="Any" selected="selected">Any</option>
-            <option value="Ascent" >Ascent</option>
-            <option value="Descent">Descent</option>
-            <option value="Melodic">Melodic</option>
-            <option value="Chord">Chord</option>
+            <option value="Ordered" >Ordered</option>
+            <option value="Unordered">Unordered</option>
+            <option value="Following">Following</option>
             <option value="None">None</option>
             </select></div>
         
@@ -184,10 +199,9 @@
         <div><label for="modulationTypeChoice2">Modulation Secondary Type:</label>
             <select id="modulationTypeChoice2">
                 <option value="Any" selected="selected">Any</option>
-                <option value="Ascent" >Ascent</option>
-                <option value="Descent">Descent</option>
-                <option value="Melodic">Melodic</option>
-                <option value="Chord">Chord</option>
+                <option value="Ordered" >Ordered</option>
+                <option value="Unordered">Unordered</option>
+                <option value="Following">Following</option>
                 <option value="None">None</option>
             </select></div>
 
@@ -195,10 +209,9 @@
         <div><label for="modulationTypeChoice3">Modulation Bridge Type:</label>
             <select id="modulationTypeChoice3">
                 <option value="Any" selected="selected">Any</option>
-                <option value="Ascent" >Ascent</option>
-                <option value="Descent">Descent</option>
-                <option value="Melodic">Melodic</option>
-                <option value="Chord">Chord</option>
+                <option value="Ordered" >Ordered</option>
+                <option value="Unordered">Unordered</option>
+                <option value="Following">Following</option>
                 <option value="None">None</option>
             </select></div>
     
