@@ -1,4 +1,5 @@
 //initial values and variables and arrays
+    let songTitleArray = []
     let tempo = []
     let scaleArray = []
     let chordArrayAll = []
@@ -23,6 +24,7 @@
     let modulationPrimary; let modulationSecondary; let modulationBridge
 
 //display items
+    const songTitleDisplay = document.getElementById("songTitleDisplay")
     const outputHigh = document.getElementById("tempoHighDisplay")
     const outputLow = document.getElementById("tempoLowDisplay")
     const outputSongLength = document.getElementById("songLengthDisplay")
@@ -192,8 +194,52 @@
     const modulation4 = new ModulationObject('Chord', 'Following', 'Any')
     const modulation5 = new ModulationObject('None', 'None', 'Any')
 
+    
+    //Title Generator
+    const titleArray = ['abacus', 'abduct', 'abide', 'able', 'ably', 'abort', 'absent', 'accuse', 'acid', 'acme', 'acorn', 'act', 'actor', 'adapt', 'adopt', 'adrift', 'advent', 'afford', 'age', 'aim', 'air', 'alamo', 
+                        'alarm', 'alert', 'all', 'alms', 'alow', 'amidst', 'amok', 'ample', 'anchors', 'and', 'angle', 'angled', 'ant', 'anxious', 'ape', 'apex', 'apple', 'arch', 'area', 'arid', 'arm', 'army', 'arose', 'arse', 'art', 
+                        'arts', 'ash', 'ask', 'askew', 'ate', 'atom', 'aunt', 'aura', 'bad', 'badge', 'bag', 'bait', 'bald', 'band', 'banish', 'bank', 'bark', 'barn', 'base', 'bass', 'bat', 'bath', 'bay', 'beacon', 'bead', 'beak', 
+                        'beam', 'bear', 'beat', 'bed', 'bee', 'beef', 'beer', 'beg', 'began', 'bell', 'belt', 'bend', 'bent', 'bet', 'bias', 'big', 'bike', 'bill', 'bin', 'bind', 'bird', 'birds', 'bison', 'bit', 'bitter', 'blaze', 
+                        'blink', 'blip', 'blow', 'blue', 'blunt', 'blur', 'blush', 'boat', 'boil', 'bold', 'bole', 'bolt', 'bolted', 'bond', 'bone', 'book', 'boom', 'boos', 'boot', 'bore', 'born', 'boss', 'both', 'bow', 'bowl', 'box', 
+                        'boxed', 'boxen', 'boy', 'brace', 'braid', 'brawn', 'breathe', 'bred', 'breeze', 'brick', 'bricks', 'brisk', 'brow', 'brush', 'brutal', 'bub', 'buck', 'buff', 'buffer', 'bug', 'build', 'bulk', 'bumper', 'bumpy', 
+                        'bun', 'bunk', 'burn', 'bus', 'bush', 'busy', 'but', 'buy', 'buzz', 'bye', 'cab', 'cabs', 'cache', 'cake', 'calm', 'camo', 'camp', 'can', 'candy', 'cane', 'cap', 'caper', 'car', 'card', 'care', 'carp', 'cart', 
+                        'cast', 'castle', 'cat', 'cats', 'cavity', 'cell', 'chain', 'chair', 'chilly', 'chime', 'chin', 'chip', 'choice', 'chore', 'churn', 'cider', 'circle', 'city', 'clam', 'clamp', 'clap', 'clash', 'clasp', 'claw', 
+                        'clear', 'cleft', 'climb', 'clip', 'clog', 'cloud', 'club', 'clue', 'clutch', 'coal', 'coat', 'coda', 'code', 'coin', 'cold', 'comb', 'come', 'cook', 'cool', 'cooly', 'core', 'cork', 'cost', 'cow', 'craft', 
+                        'crane', 'crate', 'crater', 'crave', 'credit', 'crew', 'crisp', 'crop', 'cry', 'cryptic', 'cube', 'cubs', 'cup', 'curb', 'cure', 'curl', 'curve', 'cut', 'dabble', 'daisy', 'dance', 'dandy', 'dark', 'darn', 
+                        'dart', 'dash', 'dashy', 'date', 'day', 'dazzle', 'deal', 'dear', 'debris', 'decept', 'deep', 'deer', 'design', 'dice', 'die', 'diet', 'dime', 'dive', 'doctor', 'dog', 'dollar', 'done', 'door', 'dot', 'douse', 
+                        'draft', 'drama', 'dream', 'drift', 'drifted', 'drill', 'drop', 'drove', 'drum', 'dry', 'duck', 'due', 'dug', 'dulled', 'dumber', 'dune', 'dusk', 'dust', 'dusty', 'dye', 'eager', 'eagle', 'earn', 'earth', 'ease', 
+                        'east', 'easy', 'eat', 'echo', 'edge', 'egg', 'elastic', 'elbow', 'elite', 'elms', 'else', 'ember', 'emit', 'emote', 'empty', 'enact', 'end', 'endure', 'enrich', 'entry', 'equal', 'era', 'eve', 'even', 'evil', 'exam', 
+                        'exert', 'exit', 'expert', 'eye', 'fabric', 'face', 'fact', 'fade', 'fair', 'fall', 'fame', 'fancy', 'fang', 'far', 'farm', 'fast', 'fat', 'fate', 'fault', 'fax', 'feast', 'fee', 'feel', 'felt', 'fern', 'fetch', 'few', 
+                        'fiery', 'fig', 'file', 'fin', 'find', 'fine', 'fire', 'firm', 'fish', 'fit', 'fix', 'fixate', 'flag', 'flair', 'flake', 'flame', 'flare', 'flash', 'flat', 'fleece', 'flick', 'flock', 'flora', 'flow', 'flute', 'fly', 
+                        'flyer', 'focus', 'fog', 'folk', 'food', 'fool', 'for', 'forb', 'fore', 'forest', 'forge', 'fork', 'four', 'free', 'frost', 'frosted', 'fruit', 'fuel', 'fumble', 'fun', 'fund', 'funny', 'fur', 'fuse', 'gad', 'gage', 
+                        'gain', 'gainer', 'gal', 'gas', 'gate', 'gauged', 'gave', 'gay', 'gaze', 'gear', 'get', 'ghostly', 'giant', 'giddy', 'gift', 'gifted', 'gig', 'gin', 'girl', 'give', 'glad', 'gleaned', 'glint', 'glisten', 'globe', 
+                        'gloom', 'glory', 'glove', 'glow', 'goer', 'gold', 'golf', 'good', 'goose', 'got', 'grace', 'graced', 'grape', 'grasp', 'grass', 'grave', 'gravy', 'grip', 'gritted', 'grow', 'grumpy', 'guess', 'gum', 'gun', 
+                        'gust', 'gut', 'gutter', 'guy', 'had', 'hail', 'hair', 'halo', 'halt', 'ham', 'hammer', 'hand', 'hang', 'happy', 'hard', 'harm', 'harsh', 'has', 'haste', 'hasty', 'hat', 'hate', 'have', 'hay', 'head', 'heal', 
+                        'hear', 'heart', 'hearty', 'heh', 'heist', 'helix', 'help', 'hen', 'her', 'hero', 'hey', 'hide', 'hill', 'hilltop', 'hinder', 'hinge', 'hip', 'hit', 'honey', 'honor', 'hope', 'hoped', 'horse', 'hot', 'hound',
+                        'hour', 'house', 'hover', 'how', 'hug', 'hugged', 'hunch', 'hunger', 'hunt', 'hushed', 'hut', 'ice', 'icebox', 'icy', 'idea', 'idle', 'idol', 'ignite', 'ills', 'imbue', 'index', 'ink', 'inked', 'insect', 
+                        'inside', 'insist', 'intent', 'irish', 'iron', 'ironed', 'irony', 'ivory', 'jack', 'jacket', 'jail', 'jailed', 'jam', 'jar', 'jelly', 'jet', 'jewel', 'joint', 'joke', 'jolly', 'joy', 'joyful', 'jug', 'juggle',
+                        'juice', 'jumble', 'jump', 'jumper', 'jumpy', 'kettle', 'kicked', 'kinase', 'kindness', 'king', 'kinky', 'kiss', 'kit', 'knack', 'knees', 'knife', 'knit', 'knock', 'label', 'lack', 'ladder', 'lagged', 'lake', 
+                        'land', 'lap', 'lapse', 'last', 'latch', 'launch', 'law', 'lay', 'lazy', 'leaf', 'leak', 'leap', 'leash', 'led', 'ledge', 'leg', 'lemon', 'let', 'lie', 'light', 'lined', 'liner', 'linger', 'lingo', 'link', 'lip',
+                        'lit', 'lithe', 'liven', 'locket', 'lofty', 'log', 'loop', 'lot', 'lover', 'low', 'madly', 'magic', 'major', 'maker', 'mallet', 'man', 'manger', 'mango', 'map', 'marble', 'mark', 'market', 'mat', 'may', 'maze', 
+                        'meal', 'melons', 'melt', 'men', 'mended', 'met', 'mincer', 'mind', 'mint', 'minty', 'mirth', 'mock', 'model', 'modify', 'molar', 'monkey', 'monster', 'mop', 'mot', 'moth', 'mover', 'mug', 'muzzle', 'neck', 'nectar',
+                        'needed', 'needy', 'nest', 'net', 'new', 'nice', 'niece', 'night', 'noble', 'nod', 'noise', 'nor', 'north', 'nosey', 'not', 'notch', 'note', 'notice', 'now', 'nudge', 'nudged', 'nurse', 'nut', 'oak', 'oaken', 'oar',
+                        'oasis', 'odd', 'oddly', 'off', 'ogre', 'oil', 'oiled', 'oint', 'old', 'olive', 'omit', 'one', 'onion', 'onward', 'opal', 'open', 'opt', 'option', 'ore', 'our', 'out', 'outlaw', 'oval', 'ovaly', 'ozone', 'pad', 'painter',
+                        'pal', 'palsy', 'pan', 'pans', 'paper', 'parch', 'pat', 'pause', 'paw', 'pay', 'peach', 'pearl', 'pen', 'pencil', 'pesto', 'pet', 'petal', 'petty', 'pie', 'pig', 'pile', 'pin', 'pit', 'place', 'plan', 'pleat', 'pluck', 
+                        'plush', 'pod', 'poise', 'poke', 'pop', 'pot', 'pouch', 'power', 'pride', 'pro', 'proof', 'protest', 'prune', 'pub', 'pug', 'punch', 'pupil', 'put', 'queen', 'quench', 'quest', 'quick', 'quiet', 'quilt', 'quirk', 'quiver', 
+                        'quiz', 'quote', 'race', 'radio', 'radius', 'rake', 'range', 'ranger', 'rat', 'rave', 'raw', 'razor', 'reach', 'read', 'recoil', 'red', 'ref', 'reg', 'rein', 'rem', 'rep', 'rescue', 'ret', 'rig', 'rim', 'ring', 'rinse', 'rip',
+                        'ripe', 'ripple', 'risen', 'risk', 'risky', 'river', 'rob', 'rock', 'rocky', 'rod', 'roe', 'rose', 'rot', 'round', 'row', 'royal', 'rubber', 'rug', 'ruler', 'run', 'runner', 'rush', 'rut', 'sad', 'safety', 'sag', 'sap',
+                        'sat', 'saw', 'say', 'scale', 'scene', 'scoop', 'scraps', 'sea', 'secure', 'seized', 'set', 'sew', 'sex', 'shade', 'shard', 'shark', 'she', 'shift', 'shine', 'shrug', 'shy', 'singed', 'sinus', 'sip', 'sit', 'site',
+                        'six', 'skate', 'sky', 'slink', 'sly', 'slype', 'smirk', 'snake', 'snakes', 'snowy', 'sob', 'sod', 'sole', 'son', 'soup', 'spade', 'speed', 'squeeze', 'stages', 'stand', 'stare', 'station', 'stolen', 'stone', 
+                        'stud', 'stunt', 'sun', 'sup', 'surge', 'swan', 'sweep', 'sweet', 'swing', 'swoop', 'tab', 'table', 'tacky', 'tad', 'tag', 'tales', 'tally', 'tan', 'tangle', 'tank', 'tap', 'taper', 'tar', 'target', 'tasty',
+                        'tea', 'tender', 'tenth', 'test', 'thing', 'think', 'thirst', 'throat', 'throw', 'thump', 'ticket', 'ticks', 'tie', 'tight', 'tilt', 'tin', 'tinkle', 'tip', 'tips', 'tired', 'toe', 'ton', 'tonic', 'too',
+                        'tools', 'top', 'torch', 'toy', 'track', 'tramp', 'treat', 'trunk', 'try', 'tub', 'tug', 'two', 'umbra', 'under', 'union', 'unit', 'unity', 'untie', 'unveil', 'unzip', 'urban', 'urge', 'urged', 'use',
+                        'usher', 'utter', 'vaguen', 'van', 'vapid', 'vase', 'vast', 'vat', 'velvet', 'verge', 'vessel', 'vested', 'vex', 'vexed', 'via', 'vie', 'vigor', 'vine', 'viper', 'visit', 'vivid', 'voice', 'vote', 
+                        'vowel', 'wager', 'wake', 'warmth', 'warn', 'warned', 'waste', 'welcome', 'whale', 'whisk', 'wig', 'win', 'wit', 'wobble', 'wonder', 'woods', 'work', 'wound', 'woven', 'wow', 'wrath', 'xylar', 
+                        'yak', 'yam', 'yap', 'yappy', 'yar', 'yatch', 'yaw', 'yearn', 'yellow', 'yes', 'yield', 'yikes', 'yipes', 'you', 'youth', 'yummy', 'zag', 'zebra', 'zed', 'zee', 'zeist']
 
-
+    const letterArray1 = ['a','e','i','o','u',]  
+    const letterArray2 = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
+    console.log(letterArray2.length)
 
 
 
@@ -201,6 +247,7 @@
 
     //button functions
     generateButton.addEventListener('click', function(){
+        getTitle()
         getTempoInRange()
         getScale()
         getChords()
@@ -213,6 +260,21 @@
         getMany()
     })
 
+    function getTitle(){
+        songTitleArray = []
+        let wordTitleArray = []
+        for(let i = 0; i < 3; i++){
+            let num = Math.floor(Math.random()*(Number(titleArray.length)))
+            songTitleArray.push(titleArray[num])
+        }
+        for(let i = 0; i < 3; i++){
+            let num = Math.floor(Math.random()*(Number(letterArray2.length)))
+            wordTitleArray.push(letterArray2[num])
+            num = Math.floor(Math.random()*(Number(letterArray1.length)))
+            wordTitleArray.push(letterArray1[num])
+        }
+        songTitleDisplay.innerHTML = songTitleArray[0]+" "+wordTitleArray[0]+wordTitleArray[1]+wordTitleArray[2]+wordTitleArray[3]+wordTitleArray[4]+wordTitleArray[5]+" "+songTitleArray[1]+" "+songTitleArray[2]
+    }
 
     function getTempoInRange() {
         tempo = [] //clear old values
@@ -555,7 +617,7 @@
                 )}
             }
 
-    
+getTitle()    
 getTempoInRange()
 getScale()
 getChords()
